@@ -1,7 +1,7 @@
 ---
 title: Day04链表打卡
 date: 2023-08-12 04:21:03
-tags:lc打卡
+tags: lc打卡
 ---
 ## Leetcode 24 两两交换链表中的节点
 
