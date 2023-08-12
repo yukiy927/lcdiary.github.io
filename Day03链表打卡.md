@@ -150,12 +150,9 @@ class MyLinkedList:
 
 Given the head of a singly linked list, reverse the list, and return the reversed list.
 
-**思路**：重点是一个交换的思想，我觉得有点像那个最基础的交换a和b的值，就是找个temp去存一下，而这里要存的则是链表最难存的——即将失去头的结点（我这名取的好精辟）。剩下的就是更新迭代啦，不过这道题在comment里有个未解之谜，为啥我单独考虑极端情况，就超出内存限制了呢，下次博客争取加点图进来，要不然好单调哦。
+**思路**：重点是一个交换的思想，我觉得有点像那个最基础的交换a和b的值，就是找个temp去存一下，而这里要存的则是链表最难存的——即将失去头的结点（我这名取的好精辟），剩下的就是更新迭代啦。
 
-解决了的话我就更新在这里：
-
-###########
-###########
+下次博客争取加点图进来，要不然好单调哦。
 
 代码如下：
 ```python
@@ -181,6 +178,62 @@ class Solution:
         return pre
 
 ```
+## Izzy did you ask a good question today?
+不过这道题在comment里有个未解之谜，为啥我单独考虑极端情况，就超出内存限制了呢，解决了的话我就更新在这里：
+
+发现小助手的lc是会员版，出现bug如下：
+![found cycle in the ListNode](https://github.com/yukiy927/lcdiary.github.io/blob/main/pics/71fa333836b3f23b7e9ab14f2e579ec.png)
+
+研究了好久，发现是因为原来链表中的头节点，再变成尾节点之后，没有显式地将它指向空，导致了他随便指向了链表中的其中一个节点，造成了环状链表出现。
+
+由此引申出以下几个遗漏的知识点，这里感谢chatgpt老师：
+
+1. 传统的单链表中，一个节点只能指向一个下一个节点，否则需要考虑其他数据结构。
+2. 在python中，如果你创建一个单链表，并且没有显式地将尾节点指向空节点（None），那么这个链表就会成为一个环形链表。这是因为链表的最后一个节点会指向链表中的某个节点，导致链表形成一个环。
+例如，考虑如下代码：
+```python
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+
+def create_linked_list(values):
+    if not values:
+        return None
+    
+    head = Node(values[0])
+    current = head
+    for value in values[1:]:
+        current.next = Node(value)
+        current = current.next
+    
+    # 此处没有将尾节点指向None，导致链表成为环形链表
+    # current.next = None
+    
+    return head
+
+values = [1, 2, 3, 4, 5]
+head = create_linked_list(values)
+
+# 检测链表是否为环形链表
+def has_cycle(head):
+    slow = head
+    fast = head
+    
+    while fast and fast.next:
+        slow = slow.next
+        fast = fast.next.next
+        
+        if slow == fast:
+            return True
+    
+    return False
+
+print(has_cycle(head))  # 输出 True，因为链表是环形的
+```
+在上面的代码中，如果你注释掉 current.next = None 那一行，就会导致链表成为一个环形链表。然后，通过快慢指针的方式检测链表中是否存在环。
+
+## 总结
 
 （自从day02的时候carl哥让我们开始写总结，每天第一个写的就是总结哈哈哈哈，天知道我有多爱总结^^）
 
