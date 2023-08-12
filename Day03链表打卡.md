@@ -182,6 +182,7 @@ class Solution:
 不过这道题在comment里有个未解之谜，为啥我单独考虑极端情况，就超出内存限制了呢，解决了的话我就更新在这里：
 
 发现小助手的lc是会员版，出现bug如下：
+
 ![found cycle in the ListNode](https://github.com/yukiy927/lcdiary.github.io/blob/main/pics/71fa333836b3f23b7e9ab14f2e579ec.png)
 
 研究了好久，发现是因为原来链表中的头节点，再变成尾节点之后，没有显式地将它指向空，导致了他随便指向了链表中的其中一个节点，造成了环状链表出现。
