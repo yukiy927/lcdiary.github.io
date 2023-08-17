@@ -16,7 +16,7 @@ Given two strings needle and haystack, return the index of the first occurrence 
 
 <!-- ![swap_ex1](https://github.com/yukiy927/lcdiary.github.io/blob/main/pics/swap_ex1.jpg) -->
 
-**思路**：
+**思路**：自己写的，Python在处理字符串上的优势吧，切片真的很好用。思路就在注释里，很简单。
 
 
 
@@ -36,7 +36,8 @@ class Solution:
 
 Given a string s, check if it can be constructed by taking a substring of it and appending multiple copies of the substring together.
 
-**思路**：
+**思路**：没写出来，看了参考代码，暴力解法。
+思路都在comment里了，不赘述了。
 
 ```python
 class Solution:
